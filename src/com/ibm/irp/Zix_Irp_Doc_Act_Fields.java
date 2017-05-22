@@ -16,7 +16,7 @@ public class Zix_Irp_Doc_Act_Fields extends IrpFieldsAbstract {
         "web_groupssname", "set_comments_hidden",
         "comm_template", "comm_recipient_list"};
     if (DEBUG) {
-      System.out.println("Constructor for ZixIrpDocActFields called" + Integer.toString(fieldList.length));
+      System.out.println("Constructor for ZixIrpDocActFields called, # fields: " + Integer.toString(fieldList.length));
     }
   }
   

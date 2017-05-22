@@ -9,7 +9,7 @@ public class Zix_Irp_Doc2Path_Fields extends IrpFieldsAbstract {
   private Zix_Irp_Doc2Path_Fields() {
     fieldList = new String[]{"mandt", "doc_kind", "doc_path", "irp_attach_point"};
     if (DEBUG) {
-      System.out.println("Constructor for Zix_Irp_Doc2Path_Fields called" + Integer.toString(fieldList.length));
+      System.out.println("Constructor for Zix_Irp_Doc2Path_Fields called, # fields: " + Integer.toString(fieldList.length));
     }
   }
   

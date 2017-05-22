@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Map; 
 
 import com.ibm.irp.*;
 
@@ -55,6 +55,7 @@ public class CompareTables {
     
     compareMaps("a->b", map1, map2, true);
     compareMaps("b->a", map2, map1, false);    
+    System.out.println("Done :)");
   }
 
   // Method to interate over entries in first map and look up the corresponding
@@ -102,6 +103,8 @@ public class CompareTables {
       return new Zix_Irp_Doc2Path_Record(_constructorArg);
     case ZIX_IRP_ACT_MAP:
       return new Zix_Irp_Act_Map_Record(_constructorArg);
+    case ZIX_CONSTANTS_IRP_TASKS:
+      return new Zix_Constants_Irp_Tasks_Record(_constructorArg);
     default:
       System.out.println("Error, invalid table type passed in");
       System.exit(998);

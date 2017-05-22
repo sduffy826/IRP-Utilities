@@ -12,7 +12,7 @@ public class Zix_Irp_Act_Map_Fields extends IrpFieldsAbstract {
     fieldList = new String[]{"mandt", "action_code", "action_desc",
                              "upload_action", "download_action", "form_name"};
     if (DEBUG) {
-      System.out.println("Constructor for ZixIrpActMapFields called" + Integer.toString(fieldList.length));
+      System.out.println("Constructor for ZixIrpActMapFields called, # fields: " + Integer.toString(fieldList.length));
     }
   }
   

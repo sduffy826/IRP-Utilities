@@ -13,7 +13,7 @@ public class Zix_Irp_Web_Flds_Fields extends IrpFieldsAbstract {
                              "idocument_date", "ibase64attachment", "iirp_doc_desc",
                              "iirp_doc_status", "iperson_keys"};                      
     if (DEBUG) {
-      System.out.println("Constructor for ZixIrpWebFldsFields called" + Integer.toString(fieldList.length));
+      System.out.println("Constructor for ZixIrpWebFldsFields called, # fields: " + Integer.toString(fieldList.length));
     }
   }
   
