@@ -5,6 +5,7 @@ package com.ibm.irp;
 public abstract class IrpRecordAbstract implements IrpRecord {
   
   protected static final boolean DEBUGIT = false;
+  protected static final boolean CHECKALLFIELDS = true;
   protected String[] fieldValues; 
   protected IrpFieldsAbstract irpFields;
   protected IrpTables irpTableBeingProcessed;
@@ -43,21 +44,29 @@ public abstract class IrpRecordAbstract implements IrpRecord {
   public boolean isSame(IrpRecord _irpRecord) {
     boolean rtnValue = false;
     
-    int len2Check = Math.min(fieldValues.length, _irpRecord.fieldValuesLength());
+    int fld1Len = fieldValues.length;
+    int recLen = _irpRecord.fieldValuesLength();
+    int minLen2Check = Math.min(fld1Len, recLen);
+    int maxLen2Check = Math.max(fld1Len, recLen);
+    int len2Check = (CHECKALLFIELDS ? maxLen2Check : minLen2Check); 
     
-    if ( fieldValues.length != _irpRecord.fieldValuesLength()) {
-      System.out.println("Structures don't match comparing first " + Integer.toString(len2Check) + " fields");
+    if ( fld1Len != recLen) {
+      System.out.println("Structures don't match comparing " + 
+          (CHECKALLFIELDS ? "all" : "first " + Integer.toString(len2Check)) +
+          " fields");
     }
     
     if ( len2Check > 0 ) {
       rtnValue = true;
       int pos = 1; // ignore value 0 (mandt)
       while ((pos < len2Check ) && (rtnValue)) {
-        rtnValue = (fieldValues[pos].trim().equalsIgnoreCase(_irpRecord.getField(pos).trim()));
+        String fldString = (pos < fld1Len ? fieldValues[pos].trim() : "");
+        String recString = (pos < recLen ? _irpRecord.getField(pos).trim() : "");
+        rtnValue = fldString.equalsIgnoreCase(recString);
         if (!rtnValue) {
           if (DEBUGIT) {
             System.out.println("** Different: " + Integer.toString(pos) +
-                               " old:" + fieldValues[pos] + " new:" + _irpRecord.getField(pos));
+                               " old:" + fldString + " new:" + recString);
           }
         }          
         pos++;
@@ -68,14 +77,22 @@ public abstract class IrpRecordAbstract implements IrpRecord {
     
   // List the diffferences between the records
   public void listDifferences(IrpRecord _irpRecord) {
-    int len2Write = Math.min(fieldValues.length, _irpRecord.fieldValuesLength());
-       
-    for (int i = 0; i < len2Write; i++) {
-      if (!fieldValues[i].trim().equalsIgnoreCase(_irpRecord.getField(i).trim())) {
-        System.out.println("Field name: " + irpFields.getField(i) + " " +
-                            fieldValues[i] + " -> " + _irpRecord.getField(i));       
-      }      
-    }  
+    int fld1Len = fieldValues.length;
+    int recLen = _irpRecord.fieldValuesLength();
+    int minLen = Math.min(fld1Len, recLen);
+    int maxLen = Math.max(fld1Len, recLen);
+    int len2Write = (CHECKALLFIELDS ? maxLen : minLen); 
+    
+    int pos = 0; 
+    while (pos < len2Write ) {
+      String fldString = (pos < fld1Len ? fieldValues[pos].trim() : "");
+      String recString = (pos < recLen ? _irpRecord.getField(pos).trim() : "");
+      if (!fldString.equalsIgnoreCase(recString)) {
+        System.out.println("Field name: " + irpFields.getField(pos) + " " +
+            fldString + " -> " + recString);
+      }
+      pos++;
+    }
     return;
   } 
      

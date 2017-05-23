@@ -105,6 +105,8 @@ public class CompareTables {
       return new Zix_Irp_Act_Map_Record(_constructorArg);
     case ZIX_CONSTANTS_IRP_TASKS:
       return new Zix_Constants_Irp_Tasks_Record(_constructorArg);
+    case ZIV_IRP_ROLE:
+      return new Ziv_Irp_Role_Record(_constructorArg);
     default:
       System.out.println("Error, invalid table type passed in");
       System.exit(998);
