@@ -19,6 +19,8 @@ public class IrpFieldsHelper {
       return Zix_Constants_Irp_Tasks_Fields.getInstance();
     case ZIV_IRP_ROLE:
       return Ziv_Irp_Role_Fields.getInstance();
+    case ZIX_AL_DOC_ATTR:
+      return Zix_Al_Doc_Attr_Fields.getInstance();
     default:
       System.out.println("Invalid type requested");
       System.exit(999);
